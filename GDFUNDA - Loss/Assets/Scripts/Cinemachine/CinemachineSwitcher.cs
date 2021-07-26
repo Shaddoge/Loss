@@ -5,14 +5,14 @@ using UnityEngine;
 public class CinemachineSwitcher : MonoBehaviour
 {
     private Animator animator;
-    private bool personCamera = false;
+    private bool personCamera = true;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    private void SwitchState()
+    public void SwitchState()
     {
         if(personCamera)
         {
