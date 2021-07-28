@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.5f;
     [SerializeField] private LayerMask groundMask;
 
-    private Camera cam;
+    [SerializeField] private Camera cam;
     private CharacterController controller;
     private Vector3 velocity;
     private bool canJump = true;
@@ -19,7 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        cam = Camera.main;
+        //cam = Camera.main;
     }
 
     // Update is called once per frame
