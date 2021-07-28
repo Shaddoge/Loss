@@ -1,19 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CharacterMovement : MonoBehaviour
 {
-    private Rigidbody rb;
+    [Header("Movement")]
+    [SerializeField] private float speed = 10.0f;
+    [SerializeField] private float jumpHeight = 2.0f;
+
+    [Header("Ground detection")]
+    [SerializeField] private float groundDistance = 0.5f;
+    [SerializeField] private LayerMask groundMask;
+
+    private Camera cam;
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool canJump = true;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
+        cam = Camera.main;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        rb.MovePosition(transform.position + Camera.main.transform.forward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizontal"));
+        bool isGrounded = Physics.CheckSphere(transform.position + Vector3.down, groundDistance, groundMask);
+
+        if (velocity.y < 0.0f && isGrounded)
+            velocity.y = 0.0f;
+
+        Vector3 dir = cam.transform.forward * Input.GetAxis("Vertical") + cam.transform.right * Input.GetAxis("Horizontal");
+        dir = Vector3.ProjectOnPlane(dir, Vector3.up);
+        controller.Move(dir * speed * Time.deltaTime);
+
+        if (Input.GetButtonDown("Jump") && isGrounded && canJump)
+            velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * Physics.gravity.y);
+        
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 }
