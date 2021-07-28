@@ -16,7 +16,7 @@ public class CinemachineSwitcher : MonoBehaviour
     {
         if(personCamera)
         {
-            animator.Play("3rd Person Camera");
+            animator.Play("1st Person Camera");
         }
         else
         {
@@ -27,7 +27,7 @@ public class CinemachineSwitcher : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             SwitchState();
         }
