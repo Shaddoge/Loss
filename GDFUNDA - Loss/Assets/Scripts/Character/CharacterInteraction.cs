@@ -40,6 +40,7 @@ public class CharacterInteraction : MonoBehaviour
         {
             if(hit.transform.gameObject.GetComponent<DoorButtonTrigger>())
             {
+                Debug.Log("Touch");
                 hit.transform.gameObject.GetComponent<DoorButtonTrigger>().ButtonActive();
             }
         }

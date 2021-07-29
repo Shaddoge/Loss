@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum ObjectType
 {
-    Pedestal,
-    PlateCube,
-    PlateCylinder,
-    PlatePrism
+    Cube,
+    Cylinder,
+    Prism,
+    Pedestal
 }
 
 public class PickableObject : MonoBehaviour

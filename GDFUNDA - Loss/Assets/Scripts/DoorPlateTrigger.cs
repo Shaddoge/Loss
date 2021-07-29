@@ -17,9 +17,10 @@ public class DoorPlateTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         numColliding++;
-        if(!isActive && triggerRequired == other.GetComponent<PickableObject>().objectType)
+        if(!isActive && other.GetComponent<PickableObject>())
         {
-            isActive = true;
+            if(triggerRequired == other.GetComponent<PickableObject>().objectType)
+             isActive = true;
         }
     }
 
