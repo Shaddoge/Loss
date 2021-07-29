@@ -38,13 +38,12 @@ public class DoorButtonTrigger : MonoBehaviour
             }
         }
         
-
         if(isActive && heightCounter < height)
         {
             heightCounter += openSpeed * Time.deltaTime;
             door.transform.position += new Vector3(0f, openSpeed * Time.deltaTime, 0f);
         }
-        else if(heightCounter > 0.0f)
+        else if(!isActive && heightCounter > 0.0f)
         {
             heightCounter -= openSpeed * Time.deltaTime;
             door.transform.position -= new Vector3(0f, openSpeed * Time.deltaTime, 0f);

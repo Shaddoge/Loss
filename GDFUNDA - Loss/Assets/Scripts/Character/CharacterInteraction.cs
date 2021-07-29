@@ -19,14 +19,22 @@ public class CharacterInteraction : MonoBehaviour
     private void Grab()
     {
         // Grabbing Objects
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.collider.tag == "Pickable")
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
         {
             if(strength >= hit.transform.GetComponent<Rigidbody>().mass)
+            {
+                hit.transform.GetComponent<PickableObject>().isGrabbed = true;
                 grabbedObject = hit.transform.gameObject;
+            }
+                
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            grabbedObject = null;
+            if(grabbedObject != null)
+            {
+                hit.transform.GetComponent<PickableObject>().isGrabbed = false;
+                grabbedObject = null;
+            }
         }
         if (grabbedObject)
         {

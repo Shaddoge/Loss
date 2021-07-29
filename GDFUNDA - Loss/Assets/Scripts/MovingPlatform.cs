@@ -12,8 +12,35 @@ public class MovingPlatform : MonoBehaviour
 
     private float ticks = 0.0f;
     private bool isReverse = false;
+
+    public List<Rigidbody> rigidbodies = new List<Rigidbody>();
+
+    public Vector3 lastPosition;
+    Transform _transform;
+
+    private void Start()
+    {
+        _transform = transform;
+        lastPosition = _transform.position;
+    }
+
+    private void LateUpdate()
+    {
+        if (rigidbodies.Count > 0)
+        {
+            for (int i = 0; i < rigidbodies.Count; i++)
+            {
+                Rigidbody rb = rigidbodies[i];
+                Vector3 velocity = (_transform.position - lastPosition);
+                rb.transform.Translate(velocity, _transform);
+            }
+        }
+        lastPosition = _transform.position;
+    }
+
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         ticks += Time.deltaTime;
         if (ticks > timeSwitch)
@@ -41,4 +68,48 @@ public class MovingPlatform : MonoBehaviour
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        Debug.Log("Touch");
+        if(other.tag == "Player")
+        {
+            other.transform.parent = this.transform;
+            other.transform.localPosition = Vector3.up * 1.1f;
+        }
+
+        if (rb != null)
+        {
+            Add(rb);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        
+        if(other.tag == "Player")
+        {
+            other.transform.parent = null;
+        }
+
+        if (rb != null)
+        {
+            Remove(rb);
+        }
+    }
+
+    void Add(Rigidbody rb)
+    {
+        if (!rigidbodies.Contains(rb))
+            rigidbodies.Add(rb);
+    }
+
+    void Remove(Rigidbody rb)
+    {
+        if (rigidbodies.Contains(rb))
+            rigidbodies.Remove(rb);
+    }
+
 }
