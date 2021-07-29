@@ -10,50 +10,59 @@ public class DoorPlateTrigger : MonoBehaviour
     [SerializeField] private float height = 4.0f;
     [SerializeField] private float openSpeed = 2.0f;
     private float heightCounter = 0.0f;
+    
+    //Button Pressure
+    private float pushHeight = 0.125f;
+    private float pushTicks = 0.0f;
 
     int numColliding = 0;
     bool isActive = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        numColliding++;
-        if(!isActive && other.GetComponent<PickableObject>())
+        if(other.GetComponent<PickableObject>())
         {
-            if(triggerRequired == other.GetComponent<PickableObject>().objectType)
-             isActive = true;
+            numColliding++;
+            Debug.Log(numColliding);
+            if (!isActive && triggerRequired == other.GetComponent<PickableObject>().objectType)
+            {
+                isActive = true;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        numColliding--;
-        if(isActive && numColliding <= 0)
+        if (other.GetComponent<PickableObject>())
         {
-            isActive = false;
+            numColliding--;
+            Debug.Log(numColliding);
+            if (isActive && numColliding <= 0)
+            {
+                isActive = false;
+            }
         }
-    }
-
-    public void ButtonActive()
-    {
-        if(heightCounter <= 0.0f)
-        {
-            isActive = true;
-        }
-    }
-
-    public void ButtonInactive()
-    {
-        isActive = false;
     }
 
     private void Update()
     {
+        if(isActive && pushTicks <= pushHeight)
+        {
+            pushTicks += Time.deltaTime;
+            transform.position -= new Vector3(0f, Time.deltaTime, 0f);
+        }
+        else if(!isActive && pushTicks > 0f)
+        {
+            pushTicks -= Time.deltaTime;
+            transform.position += new Vector3(0f, Time.deltaTime, 0f);
+        }
+
         if(isActive && heightCounter < height)
         {
             heightCounter += openSpeed * Time.deltaTime;
             door.transform.position += new Vector3(0f, openSpeed * Time.deltaTime, 0f);
         }
-        else if(heightCounter > 0.0f)
+        else if(!isActive && heightCounter > 0.0f)
         {
             heightCounter -= openSpeed * Time.deltaTime;
             door.transform.position -= new Vector3(0f, openSpeed * Time.deltaTime, 0f);

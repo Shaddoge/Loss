@@ -13,4 +13,5 @@ public enum ObjectType
 public class PickableObject : MonoBehaviour
 {
     public ObjectType objectType;
+    public bool isGrabbed = false;
 }
