@@ -10,6 +10,10 @@ public class DoorButtonTrigger : MonoBehaviour
     [SerializeField] private float timer = 0.0f;
     private float heightCounter = 0.0f;
 
+    //Button Pressure
+    private float pushHeight = 0.03125f;
+    private float pushTicks = 0.0f;
+
     bool isActive = false;
     float ticks = 0.0f;
 
@@ -28,7 +32,18 @@ public class DoorButtonTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(timer > 0.0f && isActive)
+        if (isActive && pushTicks <= pushHeight)
+        {
+            pushTicks += Time.deltaTime;
+            transform.localPosition -= new Vector3(0f, Time.deltaTime, 0f);
+        }
+        else if (!isActive && pushTicks > 0f)
+        {
+            pushTicks -= Time.deltaTime;
+            transform.localPosition += new Vector3(0f, Time.deltaTime, 0f);
+        }
+
+        if (timer > 0.0f && isActive)
         {
             ticks += Time.deltaTime;
             if (ticks >= timer)
