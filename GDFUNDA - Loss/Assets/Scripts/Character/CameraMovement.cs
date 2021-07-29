@@ -9,10 +9,6 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float sensitivityX = 100.0f;
     [SerializeField] private float sensitivityY = 100.0f;
 
-    [SerializeField] private Transform grabPosition;
-    RaycastHit hit;
-    GameObject grabbedObject;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -32,18 +28,5 @@ public class CameraMovement : MonoBehaviour
         pitch = Mathf.Clamp(pitch, -90.0f, 90.0f);
 
         transform.rotation = Quaternion.Euler(new Vector3(pitch, yaw, 0.0f));
-
-        if(Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>())
-        {
-            grabbedObject = hit.transform.gameObject;
-        }
-        else if(Input.GetMouseButtonUp(0))
-        {
-            grabbedObject = null;
-        }
-        if(grabbedObject)
-        {
-            grabbedObject.GetComponent<Rigidbody>().velocity = 10 * (grabPosition.position - grabbedObject.transform.position);
-        }
     }
 }

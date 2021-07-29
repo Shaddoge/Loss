@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.5f;
     [SerializeField] private LayerMask groundMask;
 
+    private Camera cam;
+    private Character character;
     private CharacterController controller;
     private Vector3 velocity;
     // Start is called before the first frame update
