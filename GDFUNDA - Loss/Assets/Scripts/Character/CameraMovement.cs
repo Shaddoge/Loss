@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float sensitivityX = 100.0f;
     [SerializeField] private float sensitivityY = 100.0f;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
