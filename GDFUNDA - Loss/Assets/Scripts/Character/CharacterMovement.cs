@@ -11,15 +11,14 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.5f;
     [SerializeField] private LayerMask groundMask;
 
-    [SerializeField] private Camera cam;
     private CharacterController controller;
     private Vector3 velocity;
-    private bool canJump = true;
     // Start is called before the first frame update
     private void Start()
     {
+        cam = Camera.main;
+        character = GetComponent<Character>();
         controller = GetComponent<CharacterController>();
-        //cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -34,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
         dir = Vector3.ProjectOnPlane(dir, Vector3.up);
         controller.Move(dir * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && isGrounded && canJump)
+        if (Input.GetButtonDown("Jump") && isGrounded && (character.GetState() & CharacterState.Legs) != 0)
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * Physics.gravity.y);
         
         velocity.y += Physics.gravity.y * Time.deltaTime;
