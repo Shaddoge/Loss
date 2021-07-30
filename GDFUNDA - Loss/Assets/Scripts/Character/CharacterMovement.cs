@@ -33,11 +33,13 @@ public class CharacterMovement : MonoBehaviour
 
     private void PushingState()
     {
+        Debug.Log("Character is Pushing State");
         isPushing = true;
     }
 
     private void NormalState()
     {
+        Debug.Log("Character is Normal State");
         isPushing = false;
     }
 
@@ -54,10 +56,19 @@ public class CharacterMovement : MonoBehaviour
         dir = Vector3.ProjectOnPlane(dir, Vector3.up);
         controller.Move(dir * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && isGrounded && (character.GetState() & CharacterState.Legs) != 0)
+        if (Input.GetButtonDown("Jump") && isGrounded && (character.GetState() & CharacterState.Legs) != 0 && !isPushing)
             velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * Physics.gravity.y);
         
         velocity.y += Physics.gravity.y * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        
+        if(isPushing)
+        {
+            cam.GetComponent<CameraMovement>().LockYaw();
+        }
+        else
+        {
+            cam.GetComponent<CameraMovement>().UnlockYaw();
+        }
     }
 }

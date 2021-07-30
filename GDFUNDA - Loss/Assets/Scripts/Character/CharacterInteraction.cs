@@ -9,31 +9,36 @@ public class CharacterInteraction : MonoBehaviour
     [SerializeField] private float strength = 1.0f;
     RaycastHit hit;
     GameObject grabbedObject;
+    GameObject pushingObject;
 
     // Update is called once per frame
     private void Update()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
         {
-            Grab();
             EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PICKABLE_IN_RANGE);
         }
         else if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<TriggerButton>())
         {
-            Interact();
             EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.BUTTON_IN_RANGE);
+        }
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable")
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PUSHABLE_IN_RANGE);
         }
         else
         {
             EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.OUT_OF_RANGE);
         }
+        Grab();
+        Interact();
+        Push();
     }
 
     private void Grab()
     {
-        
         // Grabbing Objects
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
         {
             if(strength >= hit.transform.GetComponent<Rigidbody>().mass)
             {
@@ -42,6 +47,7 @@ public class CharacterInteraction : MonoBehaviour
                 
         }
         else if (Input.GetMouseButtonUp(0))
+
         {
             if(grabbedObject != null)
             {
@@ -56,11 +62,30 @@ public class CharacterInteraction : MonoBehaviour
 
     private void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<TriggerButton>())
         {
             if(hit.transform.gameObject.GetComponent<TriggerButton>())
             {
                 hit.transform.gameObject.GetComponent<TriggerButton>().ButtonActive();
+            }
+        }
+    }
+
+    private void Push()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable")
+        {
+            Debug.Log("Pushing");
+            EventBroadcaster.Instance.PostEvent(EventNames.Player_Events.IS_PUSHING_STATE);
+            pushingObject = hit.transform.gameObject;
+            pushingObject.transform.parent = this.transform.parent;
+        }
+        else if(Input.GetKeyUp(KeyCode.E))
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.Player_Events.IS_NORMAL_STATE);
+            if (pushingObject != null)
+            {
+                pushingObject.transform.parent = null;
             }
         }
     }
