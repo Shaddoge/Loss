@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterInteraction : MonoBehaviour
 {
@@ -12,21 +13,40 @@ public class CharacterInteraction : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Grab();
-        Interact();
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
+        {
+            Grab();
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PICKABLE_IN_RANGE);
+        }
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<TriggerButton>())
+        {
+            Interact();
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.BUTTON_IN_RANGE);
+        }
+        else
+        {
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.OUT_OF_RANGE);
+        }
     }
 
     private void Grab()
     {
+        
         // Grabbing Objects
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.collider.tag == "Pickable")
+        if (Input.GetMouseButtonDown(0))
         {
             if(strength >= hit.transform.GetComponent<Rigidbody>().mass)
+            {
                 grabbedObject = hit.transform.gameObject;
+            }
+                
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            grabbedObject = null;
+            if(grabbedObject != null)
+            {
+                grabbedObject = null;
+            }
         }
         if (grabbedObject)
         {
@@ -36,14 +56,12 @@ public class CharacterInteraction : MonoBehaviour
 
     private void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.E) && Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.collider.tag == "Interactable")
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if(hit.transform.gameObject.GetComponent<DoorButtonTrigger>())
+            if(hit.transform.gameObject.GetComponent<TriggerButton>())
             {
-                Debug.Log("Touch");
-                hit.transform.gameObject.GetComponent<DoorButtonTrigger>().ButtonActive();
+                hit.transform.gameObject.GetComponent<TriggerButton>().ButtonActive();
             }
         }
     }
-
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorButtonTrigger : MonoBehaviour
+public class TriggerButton : MonoBehaviour
 {
     [SerializeField] private GameObject door;
     [SerializeField] private float height = 4.0f;
@@ -10,7 +10,11 @@ public class DoorButtonTrigger : MonoBehaviour
     [SerializeField] private float timer = 0.0f;
     private float heightCounter = 0.0f;
 
-    bool isActive = false;
+    //Button Pressure
+    private float pushHeight = 0.03125f;
+    private float pushTicks = 0.0f;
+
+    public bool isActive = false;
     float ticks = 0.0f;
 
     public void ButtonActive()
@@ -28,7 +32,18 @@ public class DoorButtonTrigger : MonoBehaviour
 
     private void Update()
     {
-        if(timer > 0.0f && isActive)
+        if (isActive && pushTicks <= pushHeight)
+        {
+            pushTicks += Time.deltaTime;
+            transform.localPosition -= new Vector3(0f, Time.deltaTime, 0f);
+        }
+        else if (!isActive && pushTicks > 0f)
+        {
+            pushTicks -= Time.deltaTime;
+            transform.localPosition += new Vector3(0f, Time.deltaTime, 0f);
+        }
+
+        if (timer > 0.0f && isActive)
         {
             ticks += Time.deltaTime;
             if (ticks >= timer)
@@ -36,18 +51,6 @@ public class DoorButtonTrigger : MonoBehaviour
                 isActive = false;
                 ticks = 0.0f;
             }
-        }
-        
-
-        if(isActive && heightCounter < height)
-        {
-            heightCounter += openSpeed * Time.deltaTime;
-            door.transform.position += new Vector3(0f, openSpeed * Time.deltaTime, 0f);
-        }
-        else if(heightCounter > 0.0f)
-        {
-            heightCounter -= openSpeed * Time.deltaTime;
-            door.transform.position -= new Vector3(0f, openSpeed * Time.deltaTime, 0f);
         }
     }
 
