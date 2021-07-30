@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class TriggerButton : MonoBehaviour
 {
-    [SerializeField] private GameObject door;
-    [SerializeField] private float height = 4.0f;
-    [SerializeField] private float openSpeed = 2.0f;
     [SerializeField] private float timer = 0.0f;
-    private float heightCounter = 0.0f;
 
     //Button Pressure
     private float pushHeight = 0.03125f;
@@ -17,12 +13,17 @@ public class TriggerButton : MonoBehaviour
     public bool isActive = false;
     float ticks = 0.0f;
 
+    Vector3 initialPos;
+
+    private void Start()
+    {
+        initialPos = this.transform.localPosition;
+    }
+
     public void ButtonActive()
     {
-        if(heightCounter <= 0.0f)
-        {
+        if(!isActive)
             isActive = true;
-        }
     }
 
     public void ButtonInactive()
@@ -35,12 +36,12 @@ public class TriggerButton : MonoBehaviour
         if (isActive && pushTicks <= pushHeight)
         {
             pushTicks += Time.deltaTime;
-            transform.localPosition -= new Vector3(0f, Time.deltaTime, 0f);
+            transform.localPosition = initialPos - new Vector3(0f, pushTicks, 0f);
         }
         else if (!isActive && pushTicks > 0f)
         {
             pushTicks -= Time.deltaTime;
-            transform.localPosition += new Vector3(0f, Time.deltaTime, 0f);
+            transform.localPosition = initialPos - new Vector3(0f, pushTicks, 0f);
         }
 
         if (timer > 0.0f && isActive)

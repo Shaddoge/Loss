@@ -13,14 +13,16 @@ public class EventNames {
 
 	public const string ON_PICTURE_CLICKED = "ON_PICTURE_CLICKED";
 
-	public class Puzzle_Events {
-		public const string ON_DOOR_BUTTON_PRESSED = "ON_DOOR_BUTTON_PRESSED";
-		public const string ON_PRESSURE_PLATE_PRESSED = "ON_PRESSURE_PLATE_PRESSED";
+	public class Player_Events {
+		public const string IS_PUSHING_STATE = "IS_PUSHING_STATE";
+		public const string IS_NORMAL_STATE = "IS_NORMAL_STATE";
+
 	}
 
 	public class UI_Events {
 		public const string BUTTON_IN_RANGE = "BUTTON_IN_RANGE";
 		public const string PICKABLE_IN_RANGE = "PICKABLE_IN_RANGE";
+		public const string PUSHABLE_IN_RANGE = "PUSHABLE_IN_RANGE";
 		public const string OUT_OF_RANGE = "OUT_OF_RANGE";
 	}
 
