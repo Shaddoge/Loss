@@ -9,40 +9,31 @@ public class CharacterInteraction : MonoBehaviour
     [SerializeField] private float strength = 1.0f;
     RaycastHit hit;
     GameObject grabbedObject;
-    GameObject crosshair;
-    [SerializeField] GameObject guide;
-
-    private void Start()
-    {
-        crosshair = GameObject.Find("Crosshair");
-    }
 
     // Update is called once per frame
     private void Update()
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
         {
-            crosshair.GetComponent<Image>().color = new Color32(100, 255, 255, 255);
+            Grab();
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PICKABLE_IN_RANGE);
         }
-        else if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.collider.tag == "Interactable")
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<TriggerButton>())
         {
-            crosshair.GetComponent<Image>().color = new Color32(100, 255, 255, 255);
-            guide.SetActive(true);
+            Interact();
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.BUTTON_IN_RANGE);
         }
         else
         {
-            crosshair.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
-            guide.SetActive(false);
+            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.OUT_OF_RANGE);
         }
-        Grab();
-        Interact();
     }
 
     private void Grab()
     {
         
         // Grabbing Objects
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
+        if (Input.GetMouseButtonDown(0))
         {
             if(strength >= hit.transform.GetComponent<Rigidbody>().mass)
             {
@@ -65,11 +56,11 @@ public class CharacterInteraction : MonoBehaviour
 
     private void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.collider.tag == "Interactable")
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if(hit.transform.gameObject.GetComponent<DoorButtonTrigger>())
+            if(hit.transform.gameObject.GetComponent<TriggerButton>())
             {
-                hit.transform.gameObject.GetComponent<DoorButtonTrigger>().ButtonActive();
+                hit.transform.gameObject.GetComponent<TriggerButton>().ButtonActive();
             }
         }
     }

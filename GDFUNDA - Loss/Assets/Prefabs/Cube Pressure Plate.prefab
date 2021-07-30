@@ -661,8 +661,7 @@ GameObject:
   - component: {fileID: 2743044469443659524}
   - component: {fileID: 2743044469443659527}
   - component: {fileID: 3119365373583062696}
-  - component: {fileID: 6459834672049495643}
-  - component: {fileID: 8824116784328013759}
+  - component: {fileID: 520444751727385127}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -976,7 +975,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.75, y: 0.25, z: 1.75}
   m_Center: {x: 1, y: 0.25, z: -1}
---- !u!114 &6459834672049495643
+--- !u!114 &520444751727385127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -988,23 +987,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc99426051c93f4fb9ad4cab1f2b53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerRequired: 1
-  door: {fileID: 0}
-  height: 4
-  openSpeed: 2
---- !u!54 &8824116784328013759
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2743044469443659526}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  triggerRequired: 0
+  isActive: 0
