@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     {
         EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
+        EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.PUSHABLE_IN_RANGE, this.PushableGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.OUT_OF_RANGE, this.GuideDisable);
     }
 
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
     {
         EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.BUTTON_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.PICKABLE_IN_RANGE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.PUSHABLE_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.OUT_OF_RANGE);
     }
 
@@ -70,6 +72,13 @@ public class UIManager : MonoBehaviour
     {
         crosshair.GetComponent<Image>().color = new Color32(100, 255, 255, 255);
         guide.GetComponent<Text>().text = "[M1] Pick-up Object";
+        guide.SetActive(true);
+    }
+
+    private void PushableGuideEnable()
+    {
+        crosshair.GetComponent<Image>().color = new Color32(100, 255, 255, 255);
+        guide.GetComponent<Text>().text = "[E] Push/Pull Object";
         guide.SetActive(true);
     }
 
