@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,21 @@ using UnityEngine;
 [System.Flags]
 public enum CharacterState
 {
-    LeftArm = 0,
-    RightArm = 1,
-    Legs = 2,   
+    None = 0,
+    LeftArm = 1,
+    RightArm = 2,
+    Legs = 4,   
 
     Arms = LeftArm | RightArm
 }
 public class Character : MonoBehaviour
 {
-    [SerializeField] private CharacterState state;
+    [SerializeField] private CharacterState state = CharacterState.None;
+    public event Action<CharacterState> OnStateAdded = delegate { };
+    private void Start()
+    {
+        this.AddState(CharacterState.LeftArm);
+    }
 
     public CharacterState GetState()
     {
@@ -23,5 +30,6 @@ public class Character : MonoBehaviour
     public void AddState(CharacterState newState)
     {
         state |= newState;
+        OnStateAdded(newState);
     }
 }
