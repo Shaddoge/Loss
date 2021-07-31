@@ -103,7 +103,6 @@ public class UIManager : MonoBehaviour
 
     private void OneArmMovingAtSlopeDialogueEnable()
     {
-        Debug.Log("Hello");
         dialogue.GetComponent<Text>().text = "I only have one arm. I should find my other arm.";
         dialogue.SetActive(true);
     }
