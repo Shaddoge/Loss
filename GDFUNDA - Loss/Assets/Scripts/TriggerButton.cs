@@ -10,7 +10,7 @@ public class TriggerButton : MonoBehaviour
     private float pushHeight = 0.03125f;
     private float pushTicks = 0.0f;
 
-    public bool isActive = false;
+    [HideInInspector] public bool isActive = false;
     float ticks = 0.0f;
 
     Vector3 initialPos;
