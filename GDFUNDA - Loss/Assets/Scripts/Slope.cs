@@ -6,9 +6,11 @@ public class Slope : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && other.gameObject.GetComponent<Character>())
         {
-            EventBroadcaster.Instance.PostEvent(EventNames.Dialogue_Events.IS_ONE_ARM_MOVING_AT_SLOPE);
+            CharacterState charState = other.gameObject.GetComponent<Character>().GetState();
+            if (charState == CharacterState.LeftArm || charState == CharacterState.RightArm)
+                EventBroadcaster.Instance.PostEvent(EventNames.Dialogue_Events.IS_ONE_ARM_MOVING_AT_SLOPE);
         }
     }
 
