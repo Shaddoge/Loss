@@ -33,13 +33,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void PushingState()
     {
-        Debug.Log("Character is Pushing State");
         isPushing = true;
     }
 
     private void NormalState()
     {
-        Debug.Log("Character is Normal State");
         isPushing = false;
     }
 
