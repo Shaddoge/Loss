@@ -16,14 +16,18 @@ public class EventNames {
 	public class Player_Events {
 		public const string IS_PUSHING_STATE = "IS_PUSHING_STATE";
 		public const string IS_NORMAL_STATE = "IS_NORMAL_STATE";
-
 	}
 
-	public class UI_Events {
+	public class Guide_Events {
 		public const string BUTTON_IN_RANGE = "BUTTON_IN_RANGE";
 		public const string PICKABLE_IN_RANGE = "PICKABLE_IN_RANGE";
 		public const string PUSHABLE_IN_RANGE = "PUSHABLE_IN_RANGE";
 		public const string OUT_OF_RANGE = "OUT_OF_RANGE";
+	}
+
+    public class Dialogue_Events {
+		public const string IS_ONE_ARM_MOVING_AT_SLOPE = "IS_ONE_ARM_MOVING_AT_SLOPE";
+		public const string DIALOGUE_OFF = "DIALOGUE_OFF";
 	}
 
 }
