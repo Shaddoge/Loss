@@ -5,31 +5,39 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject UI;
     private GameObject pauseMenu;
     private GameObject crosshair;
     private GameObject guide;
+    private GameObject dialogue;
 
     public static bool isPaused = false;
 
     private void Start()
     {
-        pauseMenu = UI.transform.Find("Pause Menu").gameObject;
-        crosshair = UI.transform.Find("Crosshair").gameObject;
-        guide = UI.transform.Find("Guide").gameObject;
+        pauseMenu = transform.Find("Pause Menu").gameObject;
+        crosshair = transform.Find("Crosshair").gameObject;
+        guide = transform.Find("Guide").gameObject;
+        dialogue = transform.Find("Dialogue").gameObject;
 
-        EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
-        EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
-        EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.PUSHABLE_IN_RANGE, this.PushableGuideEnable);
-        EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.OUT_OF_RANGE, this.GuideDisable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE, this.PushableGuideEnable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.OUT_OF_RANGE, this.GuideDisable);
+
+        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.IS_ONE_ARM_MOVING_AT_SLOPE, this.OneArmMovingAtSlopeDialogueEnable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.DIALOGUE_OFF, this.DialogueDisable);
+
     }
 
     private void OnDestroy()
     {
-        EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.BUTTON_IN_RANGE);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.PICKABLE_IN_RANGE);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.PUSHABLE_IN_RANGE);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.UI_Events.OUT_OF_RANGE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.BUTTON_IN_RANGE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.OUT_OF_RANGE);
+
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.IS_ONE_ARM_MOVING_AT_SLOPE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.DIALOGUE_OFF);
     }
 
     // Update is called once per frame
@@ -93,4 +101,15 @@ public class UIManager : MonoBehaviour
         guide.SetActive(false);
     }
 
+    private void OneArmMovingAtSlopeDialogueEnable()
+    {
+        Debug.Log("Hello");
+        dialogue.GetComponent<Text>().text = "I only have one arm. I should find my other arm.";
+        dialogue.SetActive(true);
+    }
+
+    private void DialogueDisable()
+    {
+        dialogue.SetActive(false);
+    }
 }

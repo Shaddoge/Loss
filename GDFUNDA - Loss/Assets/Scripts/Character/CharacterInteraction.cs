@@ -16,19 +16,19 @@ public class CharacterInteraction : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable")
         {
-            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PICKABLE_IN_RANGE);
+            EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.PICKABLE_IN_RANGE);
         }
         else if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<TriggerButton>())
         {
-            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.BUTTON_IN_RANGE);
+            EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.BUTTON_IN_RANGE);
         }
         else if (Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable")
         {
-            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PUSHABLE_IN_RANGE);
+            EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
         }
         else
         {
-            EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.OUT_OF_RANGE);
+            EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.OUT_OF_RANGE);
         }
         Grab();
         Interact();
