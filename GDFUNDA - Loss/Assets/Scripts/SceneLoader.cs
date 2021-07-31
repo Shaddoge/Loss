@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public string scene;
@@ -14,12 +15,10 @@ public class SceneLoader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isLoaded)
-            SceneManager.UnloadSceneAsync(scene, UnloadSceneOptions.None);
-        else
+        GameObject[] gameObjects = SceneManager.GetSceneByName(scene).GetRootGameObjects();
+        foreach (GameObject gameObject in gameObjects)
         {
-            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-
+            gameObject.SetActive(!isLoaded);
         }
         isLoaded = !isLoaded;
     }
