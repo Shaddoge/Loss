@@ -14,7 +14,7 @@ public class CharacterInteraction : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable")
         {
             EventBroadcaster.Instance.PostEvent(EventNames.UI_Events.PICKABLE_IN_RANGE);
         }
@@ -38,7 +38,7 @@ public class CharacterInteraction : MonoBehaviour
     private void Grab()
     {
         // Grabbing Objects
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 5) && hit.transform.GetComponent<Rigidbody>() && hit.transform.GetComponent<PickableObject>())
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable")
         {
             if(strength >= hit.transform.GetComponent<Rigidbody>().mass)
             {

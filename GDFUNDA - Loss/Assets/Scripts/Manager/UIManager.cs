@@ -5,14 +5,19 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject crosshair;
-    [SerializeField] private GameObject guide;
+    [SerializeField] private GameObject UI;
+    private GameObject pauseMenu;
+    private GameObject crosshair;
+    private GameObject guide;
 
     public static bool isPaused = false;
 
     private void Start()
     {
+        pauseMenu = UI.transform.Find("Pause Menu").gameObject;
+        crosshair = UI.transform.Find("Crosshair").gameObject;
+        guide = UI.transform.Find("Guide").gameObject;
+
         EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.UI_Events.PUSHABLE_IN_RANGE, this.PushableGuideEnable);
