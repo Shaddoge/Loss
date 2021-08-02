@@ -14,6 +14,13 @@ public class TriggerPressurePlate : MonoBehaviour
     int numColliding = 0;
     public bool isActive = false;
 
+    Vector3 initialPos;
+
+    private void Start()
+    {
+        initialPos = this.transform.localPosition;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PickableObject>())
@@ -43,12 +50,12 @@ public class TriggerPressurePlate : MonoBehaviour
         if(isActive && pushTicks <= pushHeight)
         {
             pushTicks += Time.deltaTime;
-            transform.position -= new Vector3(0f, Time.deltaTime, 0f);
+            transform.localPosition = initialPos - new Vector3(0f, pushTicks, 0f);
         }
         else if(!isActive && pushTicks > 0f)
         {
             pushTicks -= Time.deltaTime;
-            transform.position += new Vector3(0f, Time.deltaTime, 0f);
+            transform.localPosition = initialPos - new Vector3(0f, pushTicks, 0f);
         }
     }
 }

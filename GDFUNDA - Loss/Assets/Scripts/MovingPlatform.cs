@@ -7,8 +7,9 @@ enum Direction { X, Z };
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private Direction direction;
-    [SerializeField] private float timeSwitch = 10.0f;
+    [SerializeField] private float timeSwitch = 3.0f;
     [SerializeField] private float speed = 2.0f;
+    [SerializeField] private bool inverted = false;
 
     private float ticks = 0.0f;
     private bool isReverse = false;
@@ -22,6 +23,10 @@ public class MovingPlatform : MonoBehaviour
     {
         _transform = transform;
         lastPosition = _transform.position;
+        if(inverted)
+        {
+            isReverse = !isReverse;
+        }
     }
 
     private void LateUpdate()
