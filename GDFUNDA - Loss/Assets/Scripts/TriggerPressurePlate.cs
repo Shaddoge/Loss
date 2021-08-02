@@ -23,10 +23,10 @@ public class TriggerPressurePlate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<PickableObject>())
+        if(other.GetComponent<PlateTriggerObject>())
         {
             numColliding++;
-            if (!isActive && triggerRequired == other.GetComponent<PickableObject>().objectType)
+            if (!isActive && triggerRequired == other.GetComponent<PlateTriggerObject>().objectType)
             {
                 isActive = true;
             }
@@ -35,7 +35,7 @@ public class TriggerPressurePlate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<PickableObject>())
+        if (other.GetComponent<PlateTriggerObject>())
         {
             numColliding--;
             if (isActive && numColliding <= 0)
