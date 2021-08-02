@@ -4,6 +4,10 @@ using UnityEngine;
 
 public enum ObjectType
 {
+    Cube,
+    Cylinder,
+    Prism,
+    Pedestal,
     BlueCube,
     RedCube,
     YellowCube,
