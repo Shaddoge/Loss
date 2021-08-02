@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        bool isGrounded = Physics.CheckSphere(transform.position + Vector3.down, groundDistance, groundMask);
+        bool isGrounded = Physics.CheckSphere(transform.position + Vector3.down, groundDistance, groundMask, QueryTriggerInteraction.Ignore);
 
         if (velocity.y < 0.0f && isGrounded)
             velocity.y = 0.0f;
