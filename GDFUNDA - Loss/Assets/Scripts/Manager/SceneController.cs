@@ -27,7 +27,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadRoom1()
     {
-        SceneManager.LoadScene("RoomScene");
+        SceneManager.LoadScene("Room1");
     }
 
     public void LoadRoom2()
