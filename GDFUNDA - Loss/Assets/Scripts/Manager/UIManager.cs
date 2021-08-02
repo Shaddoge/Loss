@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour
     private void PushableGuideEnable()
     {
         crosshair.GetComponent<Image>().color = new Color32(100, 255, 255, 255);
-        guide.GetComponent<Text>().text = "[E] Push/Pull Object";
+        guide.GetComponent<Text>().text = "[M1] Push/Pull Object";
         guide.SetActive(true);
     }
 

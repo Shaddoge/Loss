@@ -73,14 +73,13 @@ public class CharacterInteraction : MonoBehaviour
 
     private void Push()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable")
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable")
         {
-            Debug.Log("Pushing");
             EventBroadcaster.Instance.PostEvent(EventNames.Player_Events.IS_PUSHING_STATE);
             pushingObject = hit.transform.gameObject;
             pushingObject.transform.parent = this.transform.parent;
         }
-        else if(Input.GetKeyUp(KeyCode.E))
+        else if(Input.GetMouseButtonUp(0))
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Player_Events.IS_NORMAL_STATE);
             if (pushingObject != null)
