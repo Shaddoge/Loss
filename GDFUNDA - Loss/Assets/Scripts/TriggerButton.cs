@@ -7,6 +7,7 @@ public class TriggerButton : MonoBehaviour
     [SerializeField] private float timer = 0.0f;
 
     //Button Pressure
+    private bool isPressed = false;
     private float pushHeight = 0.03125f;
     private float pushTicks = 0.0f;
 
@@ -20,25 +21,32 @@ public class TriggerButton : MonoBehaviour
         initialPos = this.transform.localPosition;
     }
 
-    public void ButtonActive()
+    public void PressButton()
     {
-        if(!isActive)
+        if (!isActive)
+        {
             isActive = true;
-    }
-
-    public void ButtonInactive()
-    {
-        isActive = false;
+            isPressed = true;
+            if (timer > 0.0f)
+            {
+                this.StartCoroutine(this.StartTimer());
+            }
+        }
+        
     }
 
     private void Update()
     {
-        if (isActive && pushTicks <= pushHeight)
+        if (!isActive && pushTicks >= pushHeight)
+        {
+            isPressed = false;
+        }
+        if (isPressed && pushTicks <= pushHeight)
         {
             pushTicks += Time.deltaTime;
             transform.localPosition = initialPos - new Vector3(0f, pushTicks, 0f);
         }
-        else if (!isActive && pushTicks > 0f)
+        else if (!isPressed && pushTicks > 0f)
         {
             pushTicks -= Time.deltaTime;
             transform.localPosition = initialPos - new Vector3(0f, pushTicks, 0f);
@@ -53,6 +61,14 @@ public class TriggerButton : MonoBehaviour
                 ticks = 0.0f;
             }
         }
+    }
+
+    
+
+    private IEnumerator StartTimer()
+    {
+        yield return new WaitForSeconds(timer);
+        isActive = false;
     }
 
 }
