@@ -45,8 +45,11 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.transform.parent = this.transform;
-        Debug.Log("Enter");
+        if(other.tag == "Player")
+        {
+            other.transform.parent = this.transform;
+            Debug.Log("Enter");
+        }
     }
 
     //private void OnTriggerStay(Collider other)
