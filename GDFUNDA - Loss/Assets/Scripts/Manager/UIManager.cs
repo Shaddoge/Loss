@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE, this.PushableGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.OUT_OF_RANGE, this.GuideDisable);
 
-        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.IS_ONE_ARM_MOVING_AT_SLOPE, this.OneArmMovingAtSlopeDialogueEnable);
+        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.IS_ONE_ARM_PUSHING, this.OneArmPushing);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.DIALOGUE_OFF, this.DialogueDisable);
 
     }
@@ -36,7 +36,6 @@ public class UIManager : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.OUT_OF_RANGE);
 
-        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.IS_ONE_ARM_MOVING_AT_SLOPE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.DIALOGUE_OFF);
     }
 
@@ -101,7 +100,7 @@ public class UIManager : MonoBehaviour
         guide.SetActive(false);
     }
 
-    private void OneArmMovingAtSlopeDialogueEnable()
+    private void OneArmPushing()
     {
         dialogue.GetComponent<Text>().text = "I only have one arm. I should find my other arm.";
         dialogue.SetActive(true);

@@ -26,7 +26,7 @@ public class EventNames {
 	}
 
     public class Dialogue_Events {
-		public const string IS_ONE_ARM_MOVING_AT_SLOPE = "IS_ONE_ARM_MOVING_AT_SLOPE";
+		public const string IS_ONE_ARM_PUSHING = "IS_ONE_ARM_PUSHING";
 		public const string DIALOGUE_OFF = "DIALOGUE_OFF";
 	}
 
