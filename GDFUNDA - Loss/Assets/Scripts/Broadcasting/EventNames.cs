@@ -13,6 +13,10 @@ public class EventNames {
 
 	public const string ON_PICTURE_CLICKED = "ON_PICTURE_CLICKED";
 
+	public class Game_Events {
+
+    }
+
 	public class Player_Events {
 		public const string IS_PUSHING_STATE = "IS_PUSHING_STATE";
 		public const string IS_NORMAL_STATE = "IS_NORMAL_STATE";

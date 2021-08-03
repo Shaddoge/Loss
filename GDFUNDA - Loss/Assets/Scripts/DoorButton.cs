@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorButton : MonoBehaviour
 {
-    //Should have DoorPlateTrigger Component
+    //Should have DoorButtonTrigger Component
     [SerializeField] private GameObject[] requiredTriggers;
     [SerializeField] private float height = 4.0f;
     [SerializeField] private float openSpeed = 2.0f;
@@ -23,9 +23,12 @@ public class DoorButton : MonoBehaviour
         isUnlocked = true;
         for (int i = 0; i < requiredTriggers.Length; i++)
         {
-            if(!requiredTriggers[i].GetComponentInChildren<TriggerButton>().isActive)
+            if(requiredTriggers[i].GetComponentInChildren<TriggerButton>())
             {
-                isUnlocked = false;
+                if (!requiredTriggers[i].GetComponentInChildren<TriggerButton>().isActive)
+                {
+                    isUnlocked = false;
+                }
             }
         }
         if(isUnlocked)
@@ -56,6 +59,4 @@ public class DoorButton : MonoBehaviour
             transform.position = initialPos + new Vector3(0f, heightCounter, 0f);
         }
     }
-
-
 }

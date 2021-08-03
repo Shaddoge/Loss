@@ -66,7 +66,7 @@ public class CharacterInteraction : MonoBehaviour
         {
             if(hit.transform.gameObject.GetComponent<TriggerButton>())
             {
-                hit.transform.gameObject.GetComponent<TriggerButton>().ButtonActive();
+                hit.transform.gameObject.GetComponent<TriggerButton>().PressButton();
             }
         }
     }
