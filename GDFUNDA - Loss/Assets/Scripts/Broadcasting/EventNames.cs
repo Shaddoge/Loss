@@ -14,7 +14,7 @@ public class EventNames {
 	public const string ON_PICTURE_CLICKED =	"ON_PICTURE_CLICKED";
 
 	public class Game_Events {
-
+		// Game end
     }
 
 	public class Player_Events {
