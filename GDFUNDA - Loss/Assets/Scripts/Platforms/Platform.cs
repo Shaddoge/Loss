@@ -48,7 +48,6 @@ public class Platform : MonoBehaviour
         if(other.tag == "Player")
         {
             other.transform.parent = this.transform;
-            Debug.Log("Enter");
         }
     }
 
@@ -62,8 +61,7 @@ public class Platform : MonoBehaviour
     //}
 
     private void OnTriggerExit(Collider other)
-    {
+    {   
         other.transform.parent = null;
-        Debug.Log("Exit");
     }
 }
