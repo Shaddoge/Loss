@@ -1521,9 +1521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerRequired: 2
-  door: {fileID: 0}
-  height: 4
-  openSpeed: 2
+  isActive: 0
 --- !u!1 &6304990891295905945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,7 +1536,7 @@ GameObject:
   - component: {fileID: 3979085143196855914}
   - component: {fileID: 8461773730913580262}
   m_Layer: 0
-  m_Name: Pipe
+  m_Name: Outer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3531,7 +3529,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 982d5d9d20dc3d84ab6c0f7d99287c66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
