@@ -19,7 +19,6 @@ public class Character : MonoBehaviour
     public event Action<CharacterState> OnStateAdded = delegate { };
     private void Start()
     {
-        this.AddState(CharacterState.LeftArm);
     }
 
     public CharacterState GetState()
