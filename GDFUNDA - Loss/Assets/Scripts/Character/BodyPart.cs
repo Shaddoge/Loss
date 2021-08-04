@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class BodyPart : MonoBehaviour
 {
-    public CharacterState part;
+    [SerializeField] private CharacterState part;
+    [SerializeField] private List<GameObject> parts = new List<GameObject>();
+
+    private void Start()
+    {
+        switch (part)
+        {
+            case CharacterState.LeftArm: GameObject.Instantiate(parts[0], this.transform); break;
+            case CharacterState.RightArm: GameObject.Instantiate(parts[1], this.transform); break;
+            case CharacterState.Legs: GameObject.Instantiate(parts[2], this.transform); break;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Character>())
-            other.GetComponent<Character>().AddState(part);
+        Character character = other.GetComponent<Character>();
+        if (character)
+            character.AddState(part);
     }
 }
