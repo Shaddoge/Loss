@@ -32,7 +32,7 @@ public class TriggerButton : MonoBehaviour
                 this.StartCoroutine(this.StartTimer());
             }
         }
-        
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     private void Update()

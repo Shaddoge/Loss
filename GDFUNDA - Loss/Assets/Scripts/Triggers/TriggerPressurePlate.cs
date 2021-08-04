@@ -31,6 +31,7 @@ public class TriggerPressurePlate : MonoBehaviour
                 isActive = true;
             }
         }
+        gameObject.GetComponent<AudioSource>().Play();
     }
 
     private void OnTriggerExit(Collider other)
