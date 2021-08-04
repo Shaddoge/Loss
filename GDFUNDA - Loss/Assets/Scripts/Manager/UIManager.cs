@@ -139,9 +139,9 @@ public class UIManager : MonoBehaviour
 
     private void OnRoomEndEnter()
     {
-        dialogue.GetComponent<Text>().text = "I think I should be able to push objects now.";
+        dialogue.GetComponent<Text>().text = "Finally...";
         dialogue.SetActive(true);
-        this.StartCoroutine(this.DialogueDisableTimer(4.0f));
+        this.StartCoroutine(this.DialogueDisableTimer(2.0f));
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_END_ENTER);
     }
 
