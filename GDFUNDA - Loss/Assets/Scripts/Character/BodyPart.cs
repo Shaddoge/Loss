@@ -22,5 +22,6 @@ public class BodyPart : MonoBehaviour
         Character character = other.GetComponent<Character>();
         if (character)
             character.AddState(part);
+        gameObject.GetComponent<AudioSource>().Play();
     }
 }
