@@ -10,6 +10,7 @@ public class TriggerButton : MonoBehaviour
     private bool isPressed = false;
     private float pushHeight = 0.03125f;
     private float pushTicks = 0.0f;
+    private ButtonResetPressurePlate resetPressurePlate;
 
     [HideInInspector] public bool isActive = false;
     float ticks = 0.0f;
@@ -19,14 +20,21 @@ public class TriggerButton : MonoBehaviour
     private void Start()
     {
         initialPos = this.transform.localPosition;
+        resetPressurePlate = this.gameObject.GetComponent<ButtonResetPressurePlate>();
     }
 
     public void PressButton()
     {
+        
         if (!isActive)
         {
             isActive = true;
             isPressed = true;
+
+            if (resetPressurePlate != null)
+            {
+                StartCoroutine(this.ResetPlateTimer());
+            }
             if (timer > 0.0f)
             {
                 this.StartCoroutine(this.StartTimer());
@@ -63,12 +71,15 @@ public class TriggerButton : MonoBehaviour
         }
     }
 
-    
-
     private IEnumerator StartTimer()
     {
         yield return new WaitForSeconds(timer);
         isActive = false;
     }
 
+    private IEnumerator ResetPlateTimer()
+    {
+        yield return new WaitForSeconds(2.0f);
+        resetPressurePlate.ResetPlate();
+    }
 }
