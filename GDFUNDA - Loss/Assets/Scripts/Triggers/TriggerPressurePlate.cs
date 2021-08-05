@@ -20,6 +20,17 @@ public class TriggerPressurePlate : MonoBehaviour
         initialPos = this.transform.localPosition;
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<PlateTriggerObject>())
+        {
+            if (triggerRequired == other.GetComponent<PlateTriggerObject>().objectType)
+            {
+                isActive = true;
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<PlateTriggerObject>())
