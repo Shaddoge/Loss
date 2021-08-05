@@ -29,7 +29,7 @@ public class Preload : MonoBehaviour
                 yield return null;
             }
             count--;
-            if (SceneManager.GetSceneByName(scene).buildIndex != 0)
+            if (SceneManager.GetSceneByName(scene).buildIndex != 1)
             {
                 foreach (GameObject gameObject in SceneManager.GetSceneByName(scene).GetRootGameObjects())
                 {
