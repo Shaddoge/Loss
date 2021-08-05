@@ -8,27 +8,28 @@ public class SpawnBatch : MonoBehaviour
     [SerializeField] private GameObject[] copySpawn;
     [SerializeField] private List<GameObject> spawnList;
     [SerializeField] private bool hideInitialSpawn = false;
+
     private bool onCooldown = false;
     // Start is called before the first frame update
     void Start()
     {
-        if(hideInitialSpawn)
+        ;
+        for (int i = 0; i < copySpawn.Length; i++)
         {
-            for (int i = 0; i < copySpawn.Length; i++)
-            {
-                copySpawn[i].SetActive(false);
-            }
+            copySpawn[i].SetActive(false);
         }
+        if(!hideInitialSpawn)
+            Spawn();
     }
 
     private void Update()
     {
-        if(button.GetComponent<TriggerButton>().isActive && !onCooldown)
+        if(button.GetComponentInChildren<TriggerButton>().isActive && !onCooldown)
         {
             onCooldown = true;
             Spawn();
         }
-        else if(!button.GetComponent<TriggerButton>().isActive)
+        else if(!button.GetComponentInChildren<TriggerButton>().isActive)
         {
             onCooldown = false;
         }
@@ -36,12 +37,9 @@ public class SpawnBatch : MonoBehaviour
 
     void Spawn()
     {
-        if(!hideInitialSpawn)
+        for (int i = 0; i < copySpawn.Length; i++)
         {
-            for (int i = 0; i < copySpawn.Length; i++)
-            {
-                copySpawn[i].SetActive(false);
-            }
+            copySpawn[i].SetActive(false);
         }
         
         for (int i = 0; i < spawnList.Count; i++)
