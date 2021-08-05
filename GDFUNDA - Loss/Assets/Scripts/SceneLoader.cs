@@ -33,7 +33,7 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
-            UnloadScene();
+            UnloadScene();  
         }
     }
 
