@@ -24,14 +24,4 @@ public class SceneController : MonoBehaviour
     {
         Debug.Log("No Credits Yet LMAO");
     }
-
-    public void LoadRoom1()
-    {
-        SceneManager.LoadScene("Room1");
-    }
-
-    public void LoadRoom2()
-    {
-        SceneManager.LoadScene("Room2");
-    }
 }
