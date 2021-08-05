@@ -21,7 +21,17 @@ public class BodyPart : MonoBehaviour
     {
         Character character = other.GetComponent<Character>();
         if (character)
+        {
             character.AddState(part);
-        gameObject.GetComponent<AudioSource>().Play();
+            gameObject.GetComponent<AudioSource>().Play();
+            Destroy(this.transform.GetChild(0).gameObject);
+            StartCoroutine(Destroy());
+        }
+    }
+
+    private IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(this.gameObject);
     }
 }

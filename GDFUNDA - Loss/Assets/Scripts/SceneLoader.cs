@@ -5,21 +5,57 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
-    public string scene;
-    private bool isLoaded = false;
+    [SerializeField] private string scene;
+    [SerializeField] private bool isLoaded = false;
     // Start is called before the first frame update
     private void Start()
     {
-        isLoaded = SceneManager.GetSceneByName(scene).isLoaded;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //GameObject[] gameObjects = SceneManager.GetSceneByName(scene).GetRootGameObjects();
+        //foreach (GameObject gameObject in gameObjects)
+        //{
+        //    gameObject.SetActive(!isLoaded);
+        //}
+        //Debug.Log("Loaded");
+        //isLoaded = !isLoaded;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Vector3 direction = (other.transform.position - this.transform.position).normalized;
+
+        if (Vector3.Dot(direction, this.transform.forward) > 0.5f)
+        {
+            LoadScene();
+        }
+        else
+        {
+            UnloadScene();
+        }
+    }
+
+    private void LoadScene()
+    {
         GameObject[] gameObjects = SceneManager.GetSceneByName(scene).GetRootGameObjects();
         foreach (GameObject gameObject in gameObjects)
         {
-            gameObject.SetActive(!isLoaded);
+            gameObject.SetActive(true);
         }
-        isLoaded = !isLoaded;
+        Debug.Log("Loaded");
+        isLoaded = true;
+    }
+
+    private void UnloadScene()
+    {
+        GameObject[] gameObjects = SceneManager.GetSceneByName(scene).GetRootGameObjects();
+        foreach (GameObject gameObject in gameObjects)
+        {
+            gameObject.SetActive(false);
+        }
+        Debug.Log("Unloaded");
+        isLoaded = false;
     }
 }
