@@ -29,7 +29,8 @@ public class CharacterInteraction : MonoBehaviour
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.BUTTON_IN_RANGE);
         }
-        else if (Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable" && character.GetState() >= CharacterState.Arms)
+        else if (Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable" &&
+            (character.GetState() & CharacterState.Arms) != 0)
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
         }
@@ -80,7 +81,8 @@ public class CharacterInteraction : MonoBehaviour
 
     private void Push()
     {
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable" && character.GetState() >= CharacterState.Arms)
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable" &&
+            (character.GetState() & CharacterState.Arms) != 0)
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Player_Events.IS_PUSHING_STATE);
             pushingObject = hit.transform.gameObject;

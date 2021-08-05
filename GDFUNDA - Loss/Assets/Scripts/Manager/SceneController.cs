@@ -11,7 +11,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Preload");
     }
 
     public void OnApplicationQuit()
