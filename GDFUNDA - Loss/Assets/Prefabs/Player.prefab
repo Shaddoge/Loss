@@ -148,7 +148,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ba6c2de0ed3c042871c038a0edcc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnRoomThreeEnter: {fileID: 0}
+  OnRoomSpawnEnter: {fileID: 8300000, guid: 74467f023dbe14c4e8e3c5bd501fec3a, type: 3}
+  OnRoomOneEnter: {fileID: 8300000, guid: 15658470487858141bcb927ef3530886, type: 3}
+  OnRoomTwoEnter: {fileID: 8300000, guid: 9e004759d39e6c7459150a67cdec32f2, type: 3}
+  OnRoomThreeEnter: {fileID: 8300000, guid: bc2421ded8e97b84e80d1b7dd5ec20cf, type: 3}
+  OnRoomEndEnter: {fileID: 8300000, guid: a5392628ee6db1a41babbbeadfbfa803, type: 3}
+  OnLeftArmFound: {fileID: 8300000, guid: ce64dbe46caca374d86e4db69174b909, type: 3}
+  OnRightArmFound: {fileID: 8300000, guid: 44a17fb2bc14f7c43914c790fca1ef66, type: 3}
+  OnLegsFound: {fileID: 8300000, guid: b6a6ed7ab5f68824f81ea038a57c8a37, type: 3}
 --- !u!82 &4630510137763313774
 AudioSource:
   m_ObjectHideFlags: 0
