@@ -6,6 +6,7 @@ public class DepthOfFieldController : MonoBehaviour
 {
     [SerializeField] private float focusDistance = 100.0f;
     [SerializeField] private float focusSpeed = 1.0f;
+    [SerializeField] private LayerMask layerMask;
     private Ray raycast;
     private RaycastHit hit;
     private float hitDistance = 0.0f;
@@ -24,11 +25,11 @@ public class DepthOfFieldController : MonoBehaviour
     {
         raycast = new Ray(transform.position, transform.forward * focusDistance);
         isHit = false;
-        if (Physics.Raycast(raycast, out hit, focusDistance))
+        if (Physics.Raycast(raycast, out hit, focusDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
             hitDistance = Vector3.Distance(transform.position, hit.point);
             isHit = true;
-            Debug.Log($"Hit: {hitDistance}");
+            //Debug.Log($"Hit: {hitDistance}");
         }
         else
         {
