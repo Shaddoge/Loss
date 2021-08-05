@@ -17,6 +17,6 @@ public class SceneController : MonoBehaviour
 
     public void LoadCredits()
     {
-        Debug.Log("No Credits Yet LMAO");
+        SceneManager.LoadScene("Credits");
     }
 }
