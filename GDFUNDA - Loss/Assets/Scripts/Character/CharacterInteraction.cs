@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CharacterInteraction : MonoBehaviour
 {
     [SerializeField] private Transform grabPosition;
-    [SerializeField] private float strength = 1.0f;
 
     private Character character;
     RaycastHit hit;
@@ -21,7 +20,8 @@ public class CharacterInteraction : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable")
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable" &&
+            character.GetState().HasFlag(CharacterState.LeftArm))
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.PICKABLE_IN_RANGE);
         }
@@ -30,7 +30,7 @@ public class CharacterInteraction : MonoBehaviour
             EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.BUTTON_IN_RANGE);
         }
         else if (Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable" &&
-            (character.GetState() & CharacterState.Arms) != 0)
+            character.GetState().HasFlag(CharacterState.Arms))
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
         }
@@ -46,13 +46,10 @@ public class CharacterInteraction : MonoBehaviour
     private void Grab()
     {
         // Grabbing Objects
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable")
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.transform.GetComponent<Rigidbody>() && hit.transform.tag == "Pickable" &&
+            character.GetState().HasFlag(CharacterState.LeftArm))
         {
-            if(strength >= hit.transform.GetComponent<Rigidbody>().mass)
-            {
-                grabbedObject = hit.transform.gameObject;
-            }
-                
+            grabbedObject = hit.transform.gameObject; 
         }
         else if (Input.GetMouseButtonUp(0))
 
@@ -82,7 +79,7 @@ public class CharacterInteraction : MonoBehaviour
     private void Push()
     {
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward, out hit, 2) && hit.transform.tag == "Pushable" &&
-            (character.GetState() & CharacterState.Arms) != 0)
+            character.GetState().HasFlag(CharacterState.Arms))
         {
             EventBroadcaster.Instance.PostEvent(EventNames.Player_Events.IS_PUSHING_STATE);
             pushingObject = hit.transform.gameObject;
