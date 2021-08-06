@@ -11,6 +11,9 @@ public class PostProcessObject : MonoBehaviour
         if (!owner)
             owner = this.gameObject;
         else
-            Destroy(this.gameObject);
+        {
+            Destroy(owner);
+            owner = this.gameObject;
+        }
     }
 }
