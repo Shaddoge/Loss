@@ -15,11 +15,16 @@ public enum CharacterState
 }
 public class Character : MonoBehaviour
 {
+    private static Character instance = null;
     [SerializeField] private CharacterState state = CharacterState.None;
     public event Action<CharacterState> OnStateAdded = delegate { };
     private void Start()
     {
-        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_PLAYER, DestroyCharacter);
+        //EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_PLAYER, DestroyCharacter);
+        if (!instance)
+            instance = this;
+        else
+            DestroyCharacter();
     }
 
     private void OnDestroy()
