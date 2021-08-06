@@ -33,7 +33,6 @@ public class EventNames {
 	}
 
     public class Dialogue_Events {
-		public const string IS_ONE_ARM_PUSHING =	"IS_ONE_ARM_PUSHING";
 		public const string ON_ROOM_SPAWN_ENTER =	"ON_ROOM_SPAWN_ENTER";
 		public const string ON_ROOM_ONE_ENTER =		"ON_ROOM_ONE_ENTER";
 		public const string ON_ROOM_TWO_ENTER =		"ON_ROOM_TWO_ENTER";
