@@ -19,6 +19,12 @@ public class Character : MonoBehaviour
     public event Action<CharacterState> OnStateAdded = delegate { };
     private void Start()
     {
+        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_PLAYER, DestroyCharacter);
+    }
+
+    private void OnDestroy()
+    {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.DESTROY_PLAYER);
     }
 
     public CharacterState GetState()
@@ -30,5 +36,10 @@ public class Character : MonoBehaviour
     {
         state |= newState;
         OnStateAdded(newState);
+    }
+
+    public void DestroyCharacter()
+    {
+        Destroy(this.gameObject);
     }
 }

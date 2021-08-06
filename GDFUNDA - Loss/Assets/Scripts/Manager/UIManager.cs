@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
         guide = transform.Find("Guide").gameObject;
         dialogue = transform.Find("Dialogue").gameObject;
 
+        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyUI);
         //Guide
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
@@ -33,7 +34,6 @@ public class UIManager : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_ONE_ENTER, this.OnRoomOneEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_TWO_ENTER, this.OnRoomTwoEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_THREE_ENTER, this.OnRoomThreeEnter);
-        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_END_ENTER, this.OnRoomEndEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_LEFT_ARM_FOUND, this.OnLeftArmFound);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_RIGHT_ARM_FOUND, this.OnRightArmFound);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_LEGS_FOUND, this.OnLegsFound);
@@ -42,6 +42,8 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.DESTROY_UI);
+
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.BUTTON_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
@@ -52,7 +54,6 @@ public class UIManager : MonoBehaviour
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_ONE_ENTER);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_TWO_ENTER);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_THREE_ENTER);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_END_ENTER);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_LEFT_ARM_FOUND);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_RIGHT_ARM_FOUND);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_LEGS_FOUND);
@@ -75,13 +76,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void LoadMainMenu()
-    {
-        Resume();
-        SceneManager.LoadScene("MainMenu");
-        Destroy(this.gameObject);
-    }
-
     public void Pause()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -98,6 +92,18 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         isPaused = false;
+    }
+
+    public void ReturnToMenu()
+    {
+        EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_PLAYER);
+        EventBroadcaster.Instance.PostEvent(EventNames.Scene_Controller_Events.RETURN_TO_MENU);
+        DestroyUI();
+    }
+
+    private void DestroyUI()
+    {
+        Destroy(this.gameObject);
     }
 
     private void ButtonGuideEnable()

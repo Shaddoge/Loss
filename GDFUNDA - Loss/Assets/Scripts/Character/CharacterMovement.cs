@@ -29,6 +29,7 @@ public class CharacterMovement : MonoBehaviour
     private void OnDestroy()
     {
         EventBroadcaster.Instance.RemoveObserver(EventNames.Player_Events.IS_PUSHING_STATE);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Player_Events.IS_NORMAL_STATE);
     }
 
     private void PushingState()

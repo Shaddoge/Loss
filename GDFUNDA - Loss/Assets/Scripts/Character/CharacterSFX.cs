@@ -8,10 +8,11 @@ public class CharacterSFX : MonoBehaviour
     [SerializeField] private AudioClip OnRoomOneEnter;
     [SerializeField] private AudioClip OnRoomTwoEnter;
     [SerializeField] private AudioClip OnRoomThreeEnter;
-    [SerializeField] private AudioClip OnRoomEndEnter;
+    [SerializeField] private AudioClip OnImpact;
     [SerializeField] private AudioClip OnLeftArmFound;
     [SerializeField] private AudioClip OnRightArmFound;
     [SerializeField] private AudioClip OnLegsFound;
+    
 
     private AudioSource audioSource;
 
@@ -25,11 +26,23 @@ public class CharacterSFX : MonoBehaviour
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_ONE_ENTER,     this.PlayOnRoomOneEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_TWO_ENTER,     this.PlayOnRoomTwoEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_THREE_ENTER,   this.PlayOnRoomThreeEnter);
-        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_END_ENTER,     this.PlayOnRoomEndEnter);
+        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_IMPACT,             this.PlayOnImpact);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_LEFT_ARM_FOUND,     this.PlayOnLeftArmFound);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_RIGHT_ARM_FOUND,    this.PlayOnRightArmFound);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_LEGS_FOUND,         this.PlayOnLegsFound);
 
+    }
+
+    private void OnDestroy()
+    {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_SPAWN_ENTER);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_ONE_ENTER);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_TWO_ENTER);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_THREE_ENTER);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_IMPACT);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_LEFT_ARM_FOUND);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_RIGHT_ARM_FOUND);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_LEGS_FOUND);
     }
 
     private void PlayOnRoomSpawnEnter()
@@ -60,11 +73,11 @@ public class CharacterSFX : MonoBehaviour
         StartCoroutine(RemoveObserverTimer(EventNames.Dialogue_Events.ON_ROOM_THREE_ENTER));
     }
 
-    private void PlayOnRoomEndEnter()
+    private void PlayOnImpact()
     {
-        audioSource.clip = OnRoomEndEnter;
+        audioSource.clip = OnImpact;
         audioSource.Play();
-        StartCoroutine(RemoveObserverTimer(EventNames.Dialogue_Events.ON_ROOM_END_ENTER));
+        StartCoroutine(RemoveObserverTimer(EventNames.Dialogue_Events.ON_IMPACT));
     }
 
     private void PlayOnLeftArmFound()

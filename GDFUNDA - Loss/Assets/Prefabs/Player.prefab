@@ -152,7 +152,7 @@ MonoBehaviour:
   OnRoomOneEnter: {fileID: 8300000, guid: 15658470487858141bcb927ef3530886, type: 3}
   OnRoomTwoEnter: {fileID: 8300000, guid: 9e004759d39e6c7459150a67cdec32f2, type: 3}
   OnRoomThreeEnter: {fileID: 8300000, guid: bc2421ded8e97b84e80d1b7dd5ec20cf, type: 3}
-  OnRoomEndEnter: {fileID: 8300000, guid: a5392628ee6db1a41babbbeadfbfa803, type: 3}
+  OnImpact: {fileID: 8300000, guid: 2ea36e4998b178d4b81e0c0eeb66604f, type: 3}
   OnLeftArmFound: {fileID: 8300000, guid: ce64dbe46caca374d86e4db69174b909, type: 3}
   OnRightArmFound: {fileID: 8300000, guid: 44a17fb2bc14f7c43914c790fca1ef66, type: 3}
   OnLegsFound: {fileID: 8300000, guid: b6a6ed7ab5f68824f81ea038a57c8a37, type: 3}
@@ -396,7 +396,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabPosition: {fileID: 1626301902236970832}
-  strength: 1
 --- !u!114 &5392215816981646365
 MonoBehaviour:
   m_ObjectHideFlags: 0
