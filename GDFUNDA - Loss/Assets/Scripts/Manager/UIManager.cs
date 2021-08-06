@@ -156,7 +156,7 @@ public class UIManager : MonoBehaviour
     {
         dialogue.GetComponent<Text>().text = "I can finally clear this path";
         dialogue.SetActive(true);
-        this.StartCoroutine(this.DialogueDisableTimer(5.0f));
+        this.StartCoroutine(this.DialogueDisableTimer(4.0f));
     }
 
     private void OnRoomThreeEnter()
@@ -178,7 +178,7 @@ public class UIManager : MonoBehaviour
     {
         dialogue.GetComponent<Text>().text = "I should be able to push objects with my arms now.";
         dialogue.SetActive(true);
-        this.StartCoroutine(this.DialogueDisableTimer(4.0f));
+        this.StartCoroutine(this.DialogueDisableTimer(5.0f));
     }
 
     private void OnLegsFound()
@@ -186,7 +186,7 @@ public class UIManager : MonoBehaviour
         
         dialogue.GetComponent<Text>().text = "I can jump with my legs now. It's time to escape this place.";
         dialogue.SetActive(true);
-        this.StartCoroutine(this.DialogueDisableTimer(6.0f));
+        this.StartCoroutine(this.DialogueDisableTimer(7.0f));
     }
 
     private void OneArmPushing()
