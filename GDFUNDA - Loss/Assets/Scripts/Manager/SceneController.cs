@@ -11,7 +11,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Preload");
     }
 
     public void OnApplicationQuit()
@@ -23,15 +23,5 @@ public class SceneController : MonoBehaviour
     public void LoadCredits()
     {
         Debug.Log("No Credits Yet LMAO");
-    }
-
-    public void LoadRoom1()
-    {
-        SceneManager.LoadScene("Room1");
-    }
-
-    public void LoadRoom2()
-    {
-        SceneManager.LoadScene("Room2");
     }
 }

@@ -11,7 +11,6 @@ public class TriggerPressurePlate : MonoBehaviour
     private float pushHeight = 0.125f;
     private float pushTicks = 0.0f;
 
-    int numColliding = 0;
     public bool isActive = false;
 
     Vector3 initialPos;
@@ -25,21 +24,19 @@ public class TriggerPressurePlate : MonoBehaviour
     {
         if(other.GetComponent<PlateTriggerObject>())
         {
-            numColliding++;
             if (!isActive && triggerRequired == other.GetComponent<PlateTriggerObject>().objectType)
             {
+                gameObject.GetComponent<AudioSource>().Play();
                 isActive = true;
             }
         }
-        gameObject.GetComponent<AudioSource>().Play();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<PlateTriggerObject>())
         {
-            numColliding--;
-            if (isActive && numColliding <= 0)
+            if (isActive && triggerRequired == other.GetComponent<PlateTriggerObject>().objectType)
             {
                 isActive = false;
             }
