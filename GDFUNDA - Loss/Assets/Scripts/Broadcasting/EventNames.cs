@@ -17,8 +17,7 @@ public class EventNames {
 
 	public class Game_Events {
 		// Game end
-		public const string ON_ENDING_REACHED =				"ON_ENDING_REACHED";
-		public const string ON_ENDING_CREDITS_FINISHED =	"ON_ENDING_CREDITS_FINISHED";
+		public const string ON_ENDING_REACHED =		"ON_ENDING_REACHED";
 	}
 
 	public class Player_Events {

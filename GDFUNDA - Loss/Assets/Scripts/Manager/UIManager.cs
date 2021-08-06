@@ -29,13 +29,14 @@ public class UIManager : MonoBehaviour
         guide = transform.Find("Guide").gameObject;
         dialogue = transform.Find("Dialogue").gameObject;
 
+
+        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyCurrentUIManager);
         //Guide
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE, this.PushableGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.OUT_OF_RANGE, this.GuideDisable);
         //Dialogue
-        EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.IS_ONE_ARM_PUSHING, this.OneArmPushing);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_SPAWN_ENTER, this.OnRoomSpawnEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_ONE_ENTER, this.OnRoomOneEnter);
         EventBroadcaster.Instance.AddObserver(EventNames.Dialogue_Events.ON_ROOM_TWO_ENTER, this.OnRoomTwoEnter);
@@ -48,12 +49,13 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        EventBroadcaster.Instance.RemoveObserver(EventNames.DESTROY_UI);
+
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.BUTTON_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.OUT_OF_RANGE);
 
-        EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.IS_ONE_ARM_PUSHING);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_SPAWN_ENTER);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_ONE_ENTER);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Dialogue_Events.ON_ROOM_TWO_ENTER);
