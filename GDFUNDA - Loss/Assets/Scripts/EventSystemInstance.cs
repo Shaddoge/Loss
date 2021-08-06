@@ -8,7 +8,6 @@ public class EventSystemInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log($"Instance: {instance}");
         if (!instance)
             instance = this;
         else
@@ -19,11 +18,4 @@ public class EventSystemInstance : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
-    private void DestroyEventSystem()
-    {
-        instance = null;
-        Destroy(this.gameObject);
-    }
-
 }

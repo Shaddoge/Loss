@@ -5,12 +5,16 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     private static SceneController instance = null;
+    private bool isDestroyingExisting = false;
     private void Start()
     {
         if (!instance)
             instance = this;
         else
-            DestroySceneController();
+            DestroyExistingSceneController();
+        //EventBroadcaster.Instance.AddObserver(EventNames.Main_Menu_Events.ON_PLAY_PRESSED, LoadGameScene);
+        //EventBroadcaster.Instance.AddObserver(EventNames.Main_Menu_Events.ON_QUIT_APP_PRESSED, QuitApplication);
+        Debug.Log("ADDING OBSERVER");
         EventBroadcaster.Instance.AddObserver(EventNames.Scene_Controller_Events.RETURN_TO_MENU, LoadMainMenu);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Events.ON_ENDING_REACHED, LoadEndCredits);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Events.ON_ENDING_CREDITS_FINISHED, LoadMainMenu);
@@ -18,12 +22,16 @@ public class SceneController : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventBroadcaster.Instance.RemoveObserver(EventNames.Scene_Controller_Events.RETURN_TO_MENU);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.Game_Events.ON_ENDING_REACHED);
-        EventBroadcaster.Instance.RemoveObserver(EventNames.Game_Events.ON_ENDING_CREDITS_FINISHED);
+        if(!isDestroyingExisting)
+        {
+            Debug.Log("REMOVING OBSERVER");
+            EventBroadcaster.Instance.RemoveObserver(EventNames.Scene_Controller_Events.RETURN_TO_MENU);
+            EventBroadcaster.Instance.RemoveObserver(EventNames.Game_Events.ON_ENDING_REACHED);
+            EventBroadcaster.Instance.RemoveObserver(EventNames.Game_Events.ON_ENDING_CREDITS_FINISHED);
+        }
     }
 
-    public void LoadGameScene()
+    /*public void LoadGameScene()
     {
         SceneManager.LoadScene("Preload");
     }
@@ -32,7 +40,7 @@ public class SceneController : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Quitting");
-    }
+    }*/
 
     private void LoadMainMenu()
     {
@@ -46,9 +54,13 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
-    private void DestroySceneController()
+    private void DestroyExistingSceneController()
     {
-        instance = null;
-        Destroy(this.gameObject);
+        instance.isDestroyingExisting = true;
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Scene_Controller_Events.RETURN_TO_MENU);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Game_Events.ON_ENDING_REACHED);
+        EventBroadcaster.Instance.RemoveObserver(EventNames.Game_Events.ON_ENDING_CREDITS_FINISHED);
+        Destroy(instance.gameObject);
+        instance = this;
     }
 }
