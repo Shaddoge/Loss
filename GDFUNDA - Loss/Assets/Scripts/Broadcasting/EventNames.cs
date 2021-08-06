@@ -8,8 +8,6 @@ using System.Collections;
 public class EventNames {
 	public const string DESTROY_UI =				"DESTROY_UI";
 	public const string DESTROY_PLAYER =			"DESTROY_PLAYER";
-	public const string DESTROY_POST_PROCESSING =	"DESTROY_POST_PROCESSING";
-	public const string DESTROY_EVENT_SYSTEM =		"DESTROY_EVENT_SYSTEM";
 
 	public class Scene_Controller_Events {
 		public const string RETURN_TO_MENU =		"RETURN_TO_MENU";
