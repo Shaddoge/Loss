@@ -6,6 +6,7 @@ using System.Collections;
  * Created By: NeilDG
  */ 
 public class EventNames {
+	public const string DESTROY_UI =				"DESTROY_UI";
 	public const string DESTROY_PLAYER =			"DESTROY_PLAYER";
 	public const string DESTROY_POST_PROCESSING =	"DESTROY_POST_PROCESSING";
 	public const string DESTROY_EVENT_SYSTEM =		"DESTROY_EVENT_SYSTEM";
