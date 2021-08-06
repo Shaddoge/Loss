@@ -15,6 +15,8 @@ public class TriggerEndCredits : MonoBehaviour
     private IEnumerator TriggerEndOnTimer()
     {
         yield return new WaitForSeconds(0.5f);
+        EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_PLAYER);
+        EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_UI);
         EventBroadcaster.Instance.PostEvent(EventNames.Game_Events.ON_ENDING_REACHED);
     }
     
