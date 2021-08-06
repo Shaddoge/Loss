@@ -11,20 +11,13 @@ public class EventNames {
 	public const string DESTROY_POST_PROCESSING =	"DESTROY_POST_PROCESSING";
 	public const string DESTROY_EVENT_SYSTEM =		"DESTROY_EVENT_SYSTEM";
 
-
-	public class Main_Menu_Events {
-		public const string ON_PLAY_PRESSED =		"ON_PLAY_PRESSED";
-		public const string ON_QUIT_APP_PRESSED =	"ON_QUIT_APP_PRESSED";
-	}
-
 	public class Scene_Controller_Events {
 		public const string RETURN_TO_MENU =		"RETURN_TO_MENU";
     }
 
 	public class Game_Events {
 		// Game end
-		public const string ON_ENDING_REACHED =				"ON_ENDING_REACHED";
-		public const string ON_ENDING_CREDITS_FINISHED =	"ON_ENDING_CREDITS_FINISHED";
+		public const string ON_ENDING_REACHED =		"ON_ENDING_REACHED";
 	}
 
 	public class Player_Events {
@@ -40,7 +33,6 @@ public class EventNames {
 	}
 
     public class Dialogue_Events {
-		public const string IS_ONE_ARM_PUSHING =	"IS_ONE_ARM_PUSHING";
 		public const string ON_ROOM_SPAWN_ENTER =	"ON_ROOM_SPAWN_ENTER";
 		public const string ON_ROOM_ONE_ENTER =		"ON_ROOM_ONE_ENTER";
 		public const string ON_ROOM_TWO_ENTER =		"ON_ROOM_TWO_ENTER";
