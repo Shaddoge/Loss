@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
+    private static SceneController instance = null;
     private void Start()
     {
+        if (!instance)
+            instance = this;
+        else
+            DestroySceneController();
         EventBroadcaster.Instance.AddObserver(EventNames.Scene_Controller_Events.RETURN_TO_MENU, LoadMainMenu);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Events.ON_ENDING_REACHED, LoadEndCredits);
         EventBroadcaster.Instance.AddObserver(EventNames.Game_Events.ON_ENDING_CREDITS_FINISHED, LoadMainMenu);
@@ -33,13 +38,17 @@ public class SceneController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Debug.Log("Hello");
         SceneManager.LoadScene("MainMenu");
-        Destroy(this.gameObject);
     }
 
     private void LoadEndCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    private void DestroySceneController()
+    {
+        instance = null;
+        Destroy(this.gameObject);
     }
 }

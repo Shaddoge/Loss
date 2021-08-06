@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager instance = null;
+
     private GameObject pauseMenu;
     private GameObject crosshair;
     private GameObject guide;
@@ -17,12 +19,19 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+
+        if (!instance)
+            instance = this;
+        else
+            DestroyUIManager();
+
         pauseMenu = transform.Find("Pause Menu").gameObject;
         crosshair = transform.Find("Crosshair").gameObject;
         guide = transform.Find("Guide").gameObject;
         dialogue = transform.Find("Dialogue").gameObject;
+        
+        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyUIManager);
 
-        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyUI);
         //Guide
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE, this.PickableGuideEnable);
@@ -98,12 +107,7 @@ public class UIManager : MonoBehaviour
     {
         EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_PLAYER);
         EventBroadcaster.Instance.PostEvent(EventNames.Scene_Controller_Events.RETURN_TO_MENU);
-        DestroyUI();
-    }
-
-    private void DestroyUI()
-    {
-        Destroy(this.gameObject);
+        EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_UI);
     }
 
     private void ButtonGuideEnable()
@@ -161,13 +165,6 @@ public class UIManager : MonoBehaviour
         this.StartCoroutine(this.DialogueDisableTimer(7.0f));
     }
 
-    private void OnRoomEndEnter()
-    {
-        dialogue.GetComponent<Text>().text = "*sigh*. I guess I have to find my body parts again.";
-        dialogue.SetActive(true);
-        this.StartCoroutine(this.DialogueDisableTimer(10.0f));
-    }
-
     private void OnLeftArmFound()
     {
         
@@ -210,5 +207,11 @@ public class UIManager : MonoBehaviour
 
         if(queue <= 0)
             dialogue.SetActive(false);
+    }
+
+    private void DestroyUIManager()
+    {
+        instance = null;
+        Destroy(this.gameObject);
     }
 }

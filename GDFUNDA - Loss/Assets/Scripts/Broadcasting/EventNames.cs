@@ -6,9 +6,9 @@ using System.Collections;
  * Created By: NeilDG
  */ 
 public class EventNames {
-
 	public const string DESTROY_UI = "DESTROY_UI";
 	public const string DESTROY_PLAYER = "DESTROY_PLAYER";
+	public const string DESTROY_POST_PROCESSING = "DESTROY_POST_PROCESSING";
 
 	public class Main_Menu_Events {
 		public const string ON_PLAY_PRESSED = "ON_PLAY_PRESSED";
