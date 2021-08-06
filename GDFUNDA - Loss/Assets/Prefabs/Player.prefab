@@ -123,6 +123,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  cam: {fileID: 1626301903115758424}
 --- !u!114 &1626301902082490280
 MonoBehaviour:
   m_ObjectHideFlags: 0
