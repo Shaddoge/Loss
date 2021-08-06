@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(isPaused)
             {
@@ -72,6 +73,13 @@ public class UIManager : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    public void LoadMainMenu()
+    {
+        Resume();
+        SceneManager.LoadScene("MainMenu");
+        Destroy(this.gameObject);
     }
 
     public void Pause()
