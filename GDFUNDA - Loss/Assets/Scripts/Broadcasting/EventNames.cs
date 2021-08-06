@@ -11,12 +11,6 @@ public class EventNames {
 	public const string DESTROY_POST_PROCESSING =	"DESTROY_POST_PROCESSING";
 	public const string DESTROY_EVENT_SYSTEM =		"DESTROY_EVENT_SYSTEM";
 
-
-	public class Main_Menu_Events {
-		public const string ON_PLAY_PRESSED =		"ON_PLAY_PRESSED";
-		public const string ON_QUIT_APP_PRESSED =	"ON_QUIT_APP_PRESSED";
-	}
-
 	public class Scene_Controller_Events {
 		public const string RETURN_TO_MENU =		"RETURN_TO_MENU";
     }
