@@ -28,8 +28,6 @@ public class UIManager : MonoBehaviour
         crosshair = transform.Find("Crosshair").gameObject;
         guide = transform.Find("Guide").gameObject;
         dialogue = transform.Find("Dialogue").gameObject;
-        
-        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyCurrentUIManager);
 
         //Guide
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
@@ -50,8 +48,6 @@ public class UIManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventBroadcaster.Instance.RemoveObserver(EventNames.DESTROY_UI);
-
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.BUTTON_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PICKABLE_IN_RANGE);
         EventBroadcaster.Instance.RemoveObserver(EventNames.Guide_Events.PUSHABLE_IN_RANGE);
