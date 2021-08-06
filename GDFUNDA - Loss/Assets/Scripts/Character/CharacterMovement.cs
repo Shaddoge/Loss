@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.5f;
     [SerializeField] private LayerMask groundMask;
 
-    private Camera cam;
+    [SerializeField] Camera cam;
     private Character character;
     private CharacterController controller;
     private Vector3 velocity;
@@ -19,7 +19,6 @@ public class CharacterMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        cam = Camera.main;
         character = GetComponent<Character>();
         controller = GetComponent<CharacterController>();
         EventBroadcaster.Instance.AddObserver(EventNames.Player_Events.IS_PUSHING_STATE, this.PushingState);

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4719340139844939462}
   - component: {fileID: 4719340139844939463}
   - component: {fileID: 8654943147415952396}
+  - component: {fileID: 3535881992673467110}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -138,5 +139,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a62e54b9fed8084499a309c4e21a252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3535881992673467110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4719340139844939460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5ba34398943de489d183cfdac23ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
