@@ -19,18 +19,17 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-
         if (!instance)
             instance = this;
         else
-            DestroyUIManager();
+            DestroyExistingUIManager();
 
         pauseMenu = transform.Find("Pause Menu").gameObject;
         crosshair = transform.Find("Crosshair").gameObject;
         guide = transform.Find("Guide").gameObject;
         dialogue = transform.Find("Dialogue").gameObject;
         
-        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyUIManager);
+        EventBroadcaster.Instance.AddObserver(EventNames.DESTROY_UI, this.DestroyCurrentUIManager);
 
         //Guide
         EventBroadcaster.Instance.AddObserver(EventNames.Guide_Events.BUTTON_IN_RANGE, this.ButtonGuideEnable);
@@ -105,9 +104,11 @@ public class UIManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        Time.timeScale = 1f;
+        isPaused = false;
         EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_PLAYER);
         EventBroadcaster.Instance.PostEvent(EventNames.Scene_Controller_Events.RETURN_TO_MENU);
-        EventBroadcaster.Instance.PostEvent(EventNames.DESTROY_UI);
+        DestroyCurrentUIManager();
     }
 
     private void ButtonGuideEnable()
@@ -209,7 +210,13 @@ public class UIManager : MonoBehaviour
             dialogue.SetActive(false);
     }
 
-    private void DestroyUIManager()
+    private void DestroyExistingUIManager()
+    {
+        Destroy(instance.gameObject);
+        instance = this;
+    }
+
+    private void DestroyCurrentUIManager()
     {
         instance = null;
         Destroy(this.gameObject);
