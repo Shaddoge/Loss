@@ -6,23 +6,25 @@ using System.Collections;
  * Created By: NeilDG
  */ 
 public class EventNames {
-	public const string DESTROY_UI = "DESTROY_UI";
-	public const string DESTROY_PLAYER = "DESTROY_PLAYER";
-	public const string DESTROY_POST_PROCESSING = "DESTROY_POST_PROCESSING";
+	public const string DESTROY_UI =				"DESTROY_UI";
+	public const string DESTROY_PLAYER =			"DESTROY_PLAYER";
+	public const string DESTROY_POST_PROCESSING =	"DESTROY_POST_PROCESSING";
+	public const string DESTROY_EVENT_SYSTEM =		"DESTROY_EVENT_SYSTEM";
+
 
 	public class Main_Menu_Events {
-		public const string ON_PLAY_PRESSED = "ON_PLAY_PRESSED";
-		public const string ON_QUIT_APP_PRESSED = "ON_QUIT_APP_PRESSED";
+		public const string ON_PLAY_PRESSED =		"ON_PLAY_PRESSED";
+		public const string ON_QUIT_APP_PRESSED =	"ON_QUIT_APP_PRESSED";
 	}
 
 	public class Scene_Controller_Events {
-		public const string RETURN_TO_MENU = "RETURN_TO_MENU";
+		public const string RETURN_TO_MENU =		"RETURN_TO_MENU";
     }
 
 	public class Game_Events {
 		// Game end
-		public const string ON_ENDING_REACHED = "ON_ENDING_REACHED";
-		public const string ON_ENDING_CREDITS_FINISHED = "ON_ENDING_CREDITS_FINISHED";
+		public const string ON_ENDING_REACHED =				"ON_ENDING_REACHED";
+		public const string ON_ENDING_CREDITS_FINISHED =	"ON_ENDING_CREDITS_FINISHED";
 	}
 
 	public class Player_Events {
